@@ -1,1 +1,1 @@
-# OracleDB_Course_Project
+# Oracle DB - Course Project
