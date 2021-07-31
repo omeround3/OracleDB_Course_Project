@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="D4DE00EB-13F3-76FD-A354-4DE7246B189B" name="apartment_tenants">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:14:51 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<engineerTo>
+<item key="C2615608-EFC1-3271-EFD2-70CAD4802DB0" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="apartment_id" id="9A972C22-D8E1-05A3-91FB-67651CB00503">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:17:21 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<engineerTo>
+<item key="C2615608-EFC1-3271-EFD2-70CAD4802DB0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tenant_id" id="6EC9909C-507F-D9BC-AB98-BE861E8C78AB">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:25:26 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<engineerTo>
+<item key="C2615608-EFC1-3271-EFD2-70CAD4802DB0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="rate" id="98E70101-47A9-D991-225F-B0CA1BF7960A">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:18:17 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<engineerTo>
+<item key="C2615608-EFC1-3271-EFD2-70CAD4802DB0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<defaultValue>500</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="last_vote_date" id="7B8F962C-64C4-1129-1B72-D7F5B8D5E778">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:26:09 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<engineerTo>
+<item key="C2615608-EFC1-3271-EFD2-70CAD4802DB0" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="apartment_id1" id="30D7206B-56E1-22FA-6776-933C4D91E176">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 12:28:31 UTC</createdTime>
+<generatorID>0AA0E110-5218-AE47-48E4-EE83B7FB9B0B</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<engineerTo>
+<item key="C2615608-EFC1-3271-EFD2-70CAD4802DB0" value="true"/>
+</engineerTo>
+<referedAttribute>F08EE1A9-507D-E0A8-CC05-60AC9D44CDB1</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="5389650D-AAE5-D7ED-2BAA-2FEB664BE101" name="apartment_tenants_PK">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:18:10 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<engineerTo>
+<item key="C2615608-EFC1-3271-EFD2-70CAD4802DB0" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<newElementsIDs>9A972C22-D8E1-05A3-91FB-67651CB00503,6EC9909C-507F-D9BC-AB98-BE861E8C78AB</newElementsIDs>
+<usedAttributes>
+<attributeRef>9A972C22-D8E1-05A3-91FB-67651CB00503</attributeRef>
+<attributeRef>6EC9909C-507F-D9BC-AB98-BE861E8C78AB</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,88 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F224D067-0281-7A83-486A-1CD18863F734" name="jobs_bids">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:29:53 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="jobs_job_id" id="D3CCAC43-853A-9AE3-039C-B47BD7181649">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:29:53 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B27F8695-3330-20E7-8325-A71D9777F19E" referredColumn="521705EE-813E-1413-C1F3-414E8706041A"/>
+</associations>
+</Column>
+<Column name="contractors_contractor_id" id="BB4C4C81-4DB6-A0E7-119C-996BBBF8090A">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:29:53 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="92314649-4DF7-3D5C-53E6-A87235BAE454" referredColumn="DAB58A73-29B1-3F10-C8DB-8D515217D17C"/>
+</associations>
+</Column>
+<Column name="price" id="59F425BB-C193-1C15-E96D-9E562FA005FC">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:29:53 UTC</createdTime>
+<generatorID>078CAD2A-9BB2-7A99-46A9-3C0F329119DA</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+<isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3FA42113-3D6E-F11B-C6BB-7532E5974C07" name="jobs_bids_PK">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:29:53 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D3CCAC43-853A-9AE3-039C-B47BD7181649"/>
+<colUsage columnID="BB4C4C81-4DB6-A0E7-119C-996BBBF8090A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8A9B7905-C15B-9231-8D1B-6D5582882FB8" name="jobs_bids_jobs_FK">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:29:53 UTC</createdTime>
+<generatorID>3E2865B3-35B7-C763-4C66-D37A20911CBC</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D3CCAC43-853A-9AE3-039C-B47BD7181649"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="553D1858-A476-8F45-F42C-98384668E83D" name="jobs_bids_contractors_FK">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:29:53 UTC</createdTime>
+<generatorID>3E2865B3-35B7-C763-4C66-D37A20911CBC</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BB4C4C81-4DB6-A0E7-119C-996BBBF8090A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

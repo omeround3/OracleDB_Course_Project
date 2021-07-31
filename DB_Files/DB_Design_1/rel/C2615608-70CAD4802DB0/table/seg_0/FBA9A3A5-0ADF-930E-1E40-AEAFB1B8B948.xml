@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FBA9A3A5-0ADF-930E-1E40-AEAFB1B8B948" name="apartment_payments">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>3E650420-3D94-253E-F492-2467C35FCA12</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="payment_id" id="BB3737EA-E940-7DFD-C701-D5A66CA577E5">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>19A2FC6E-97C6-A5A3-5D90-A17796DD9A89</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="aparment_id" id="193FCC62-ADBF-0772-5A22-B8450124088A">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>2E08573F-64C0-35B6-AA0C-8A5261F3D0DF</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="month" id="A04C9562-FBE2-E2BC-56F8-89A2C4C1525C">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>A2F0D70B-3C51-019F-5D92-612F783FFA62</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="payment_date" id="CD03047B-8F4E-455E-2D40-2FBB2E973537">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>084A3AA0-869E-1F9F-456A-FF182F57A0F5</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="apartment_tenants_apartment_id" id="F8FCD8BC-D923-D28D-ED7F-375DFE301141">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>CBD2EDB7-3E29-BFB3-DDFA-94AEAE1C6389</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="48FD3DE2-A11C-0FB1-E24B-115BD9CC0057" referredColumn="723C61D2-7D0A-7C84-C79F-EBF709FC4A4A"/>
+</associations>
+</Column>
+<Column name="apartment_tenants_tenant_id" id="C9485744-2B2F-7AC7-7213-432A7BCC5DC8">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>DB0FEDD2-A0E4-52F8-1B82-F3897BB749F6</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="48FD3DE2-A11C-0FB1-E24B-115BD9CC0057" referredColumn="FE170B31-9D5F-49F3-D798-68A3448EAB47"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="34A5962F-D1D6-3BD2-8AF3-EB975737A015" name="apartment_payments_PK">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>626FA9D3-2105-5C3B-BE48-6A0C7DCC3707</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BB3737EA-E940-7DFD-C701-D5A66CA577E5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8D2B54EE-FDF5-F2D1-E66B-AB67D957927B" name="apartment_payments_apartment_tenants_FK">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:09:37 UTC</createdTime>
+<generatorID>FD8EB080-3FC9-CFC8-4E69-00B8985C1066</generatorID>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F8FCD8BC-D923-D28D-ED7F-375DFE301141"/>
+<colUsage columnID="C9485744-2B2F-7AC7-7213-432A7BCC5DC8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

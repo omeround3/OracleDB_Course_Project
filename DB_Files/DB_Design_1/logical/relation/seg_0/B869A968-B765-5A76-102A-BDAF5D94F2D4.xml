@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="jobs_plans" directorySegmentName="seg_0" id="B869A968-B765-5A76-102A-BDAF5D94F2D4">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-31 13:00:21 UTC</createdTime>
+<ownerDesignName>DB_Design_1</ownerDesignName>
+<engineerTo>
+<item key="C2615608-EFC1-3271-EFD2-70CAD4802DB0" value="true"/>
+</engineerTo>
+<sourcePk>DCFE5B06-FC88-94B7-D06E-F0F25FEB9537</sourcePk>
+<targetPk>2E9AE9D4-3E43-B134-F71B-0578E5472324</targetPk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>078EDEDD-7562-0B2F-953D-364B590F349D</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>A6A386CF-96DD-43D7-780A-A22F2939BB55</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,4 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="main_view" objectID="89D7F949-B9D9-713C-DF5A-9898724B5EB5" name="Committe" visible="true"/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>
