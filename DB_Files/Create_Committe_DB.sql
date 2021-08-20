@@ -113,12 +113,15 @@ ALTER TABLE jobs_plans
 CREATE TABLE maintenance_plan (
     plan_id     INTEGER NOT NULL,
     job_id      INTEGER NOT NULL,
-    status      CHAR(1) DEFAULT '0' NOT NULL,
+    status      VARCHAR(20) DEFAULT 'waiting' NOT NULL,
     description CLOB
 );
 
 COMMENT ON COLUMN maintenance_plan.status IS
-    'True means approves plan';
+    'approved / declined / waiting. Default is waiting.';
+    
+ALTER TABLE maintenance_plan
+    ADD CHECK ( status IN ( 'approved', 'waiting', 'declined' ) );
 
 ALTER TABLE maintenance_plan ADD CONSTRAINT maintenance_plan_pk PRIMARY KEY ( plan_id,
                                                                               job_id );
