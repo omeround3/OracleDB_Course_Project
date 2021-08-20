@@ -86,7 +86,7 @@ CREATE TABLE jobs (
 );
 
 ALTER TABLE jobs
-    ADD CHECK ( job_type IN ( 'cleaning', 'gardening', 'paint', 'renovation', 'security' ) );
+    ADD CHECK ( job_type IN ( 'cleaning', 'horticulture', 'renovator', 'plumber', 'security' ) );
 
 ALTER TABLE jobs ADD CONSTRAINT jobs_pk PRIMARY KEY ( job_id );
 
