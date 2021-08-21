@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="apartment tenants apartment FK" directorySegmentName="seg_0" id="F76E4BCE-748F-A063-4527-F018EA433794">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-08-21 08:14:49 UTC</createdTime>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<engineerTo>
+<item key="B17A6F81-4605-35DD-C669-A07D5F32A84C" value="true"/>
+</engineerTo>
+<sourcePk>0BC55C73-30BD-83B7-9BAD-F377968E4FFE</sourcePk>
+<identifying>true</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>D2AD8B0E-562F-6B24-1353-156E0F8D265F</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>D4DE00EB-13F3-76FD-A354-4DE7246B189B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
