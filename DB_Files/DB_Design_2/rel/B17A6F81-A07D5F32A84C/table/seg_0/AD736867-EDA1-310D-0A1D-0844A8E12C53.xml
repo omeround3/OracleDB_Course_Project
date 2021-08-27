@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AD736867-EDA1-310D-0A1D-0844A8E12C53" name="maintenance_plan">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-08-21 09:11:21 UTC</createdTime>
+<generatorID>078EDEDD-7562-0B2F-953D-364B590F349D</generatorID>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="plan_id" id="B420C31E-7F33-AE1D-3593-BBD510F15A27">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-08-21 09:11:21 UTC</createdTime>
+<generatorID>B215FA8A-5E7E-2725-AD5D-6C18144F3BC5</generatorID>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status" id="F72F3E47-21A4-9B33-6A60-7F58E9094395">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-08-21 09:11:21 UTC</createdTime>
+<commentInRDBMS><![CDATA[The default value is 'waiting']]></commentInRDBMS>
+<generatorID>DC62EC77-5539-AE97-1CE1-B380192D6BC8</generatorID>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<listOfValues>
+<valueDef value="approved" description=""/>
+<valueDef value="declined" description=""/>
+<valueDef value="waiting" description=""/>
+</listOfValues>
+<defaultValue>waiting</defaultValue>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="description" id="E186589F-513C-E8DA-04D2-5AAF270B0887">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-08-21 09:11:21 UTC</createdTime>
+<generatorID>2E9B9660-7831-562C-5053-3639805F2EE2</generatorID>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FD3A5A4C-852A-0E61-F1F0-CF8A1F6E9BF5" name="maintenance_plan_PK">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-08-21 09:11:21 UTC</createdTime>
+<generatorID>DCFE5B06-FC88-94B7-D06E-F0F25FEB9537</generatorID>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B420C31E-7F33-AE1D-3593-BBD510F15A27"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
