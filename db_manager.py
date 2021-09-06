@@ -2,7 +2,7 @@ from config import db_connection
 import os
 import cx_Oracle
 
-cx_Oracle.init_oracle_client(lib_dir=os.environ.get("HOME")+"/Downloads/instantclient_19_8")
+# cx_Oracle.init_oracle_client(lib_dir=os.environ.get("HOME")+"/Downloads/instantclient_19_8")
 
 # Create Oracle DB connecton and return a cursor
 def connect():
