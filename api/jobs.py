@@ -17,7 +17,6 @@ def jobs():
     if job_id:
         cursor.execute(f"SELECT * FROM JOBS WHERE TENANT_ID={job_id}")
         r = cursor.fetchall()
-        con.commit()
         return jsonify(r)
     cursor.execute("select * from JOBS")
     r = cursor.fetchall()
