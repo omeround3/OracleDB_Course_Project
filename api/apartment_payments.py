@@ -6,10 +6,10 @@ con = connect()
 cursor = con.cursor()
 
 # Define Blueprint
-payments_bp = Blueprint('payments', __name__, url_prefix='/payments')
+apartment_payments_bp = Blueprint('apartment_payments', __name__, url_prefix='/apartment_payments')
 
 
-@payments_bp.route("/", methods=['GET'])
+@apartment_payments_bp.route("/", methods=['GET'])
 def payments():
     apartment_id = request.args.get('apartment_id')
     tenant_id = request.args.get('tenant_id')
@@ -33,10 +33,9 @@ def payments():
         return jsonify(r)
     cursor.execute("select * from apartment_payments")
     r = cursor.fetchall()
-    con.commit()
     return jsonify(r)
 
-@payments_bp.route('/add', methods=['POST'])
+@apartment_payments_bp.route('/add', methods=['POST'])
 def add_payment():
     # Get parameters from POST request
     apartment_id = request.form.get('apartment_id')

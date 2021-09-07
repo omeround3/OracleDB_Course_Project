@@ -585,3 +585,5 @@ VALUES (contractors_payments_payment_i.nextval, 8, to_date('1-Jun-21', 'DD-MON-R
 
 INSERT INTO CONTRACTORS_PAYMENTS (PAYMENT_ID, JOB_ID, "date", PRICE, PAYMENT_DESCRIPTION) 
 VALUES (contractors_payments_payment_i.nextval, 9, to_date('10-Jun-21', 'DD-MON-RR'), 1000, '10 payment of 100');
+
+COMMIT;

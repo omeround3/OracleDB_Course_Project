@@ -10,7 +10,7 @@ Sam Media
 from flask import Flask, request
 from db_manager import init_db
 from api.tenants import tenants_bp
-from api.payments import payments_bp
+from api.apartment_payments import apartment_payments_bp
 from api.jobs import jobs_bp
 
 
@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 # Register Blueprints
 app.register_blueprint(tenants_bp)
-app.register_blueprint(payments_bp)
+app.register_blueprint(apartment_payments_bp)
 app.register_blueprint(jobs_bp)
 
 

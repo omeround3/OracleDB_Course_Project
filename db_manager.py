@@ -19,6 +19,9 @@ elif sys.platform.startswith("win32"):
 ################################################################################
 #
 
+# pool = oracledb.SessionPool(db_connection['db_user'], db_connection['db_password'],
+                                    # db_connection['db_url'], min=2, max=5, increment=1, encoding="UTF-8")
+
 
 def connect():
     """ Create Oracle DB connecton and return a cursor """
@@ -36,7 +39,7 @@ def connect():
             # logger.debug("Username/password invalid: %s", error.code)
         else:
             # logger.debug("Database connection error: %s", e)
-            print ("Database connection error: %s".format(e))
+            print("Database connection error: %s".format(e))
         raise
 
 

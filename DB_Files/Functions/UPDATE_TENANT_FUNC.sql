@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  File created - Saturday-September-04-2021   
+--  File created - Tuesday-September-07-2021   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Function UPDATE_TENANT_FUNC
@@ -45,7 +45,7 @@ BEGIN
          RATE = v_rate, 
          LAST_VOTE_DATE = v_last_vote_date
       WHERE tenant_id = v_id;
-
+      COMMIT;
       RETURN v_id;
    -- Return -1 if the tenant doesn't exists
    ELSE
