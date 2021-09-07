@@ -1,10 +1,8 @@
 from config import db_connection
 import os
 import sys
-import cx_Oracle
-import click
+import cx_Oracle as oracledb
 from flask import current_app
-from flask.cli import with_appcontext
 
 ################################################################################
 #
@@ -13,39 +11,48 @@ from flask.cli import with_appcontext
 # or LD_LIBRARY_PATH.  cx_Oracle installation instructions are at:
 # https://cx-oracle.readthedocs.io/en/latest/user_guide/installation.html
 if sys.platform.startswith("darwin"):
-    cx_Oracle.init_oracle_client(lib_dir=os.environ.get(
+    oracledb.init_oracle_client(lib_dir=os.environ.get(
         "HOME")+"/Downloads/instantclient_19_8")
 elif sys.platform.startswith("win32"):
-    cx_Oracle.init_oracle_client(lib_dir=r"c:\oracle\instantclient_19_8")
+    oracledb.init_oracle_client(lib_dir=r"c:\oracle\instantclient_19_8")
 
 ################################################################################
 #
 
 
-# Create Oracle DB connecton and return a cursor
 def connect():
-    connection = cx_Oracle.connect(
-        db_connection['db_user'], db_connection['db_password'], db_connection['db_url'])
-    print("Database version:", connection.version)
-    print("Client version:", cx_Oracle.clientversion())
-    print("Successfully connected to Oracle Database")
-
-    return connection.cursor()
+    """ Create Oracle DB connecton and return a cursor """
+    try:
+        connection = oracledb.connect(
+            db_connection['db_user'], db_connection['db_password'], db_connection['db_url'])
+        print("Database version:", connection.version)
+        print("Client version:", oracledb.clientversion())
+        print("Successfully connected to Oracle Database")
+        return connection
+    except oracledb.DatabaseError as e:
+        error = e.args
+        if error.code == 1017:
+            print('Username/Password invaild.')
+            # logger.debug("Username/password invalid: %s", error.code)
+        else:
+            # logger.debug("Database connection error: %s", e)
+            print ("Database connection error: %s".format(e))
+        raise
 
 
 def init_db():
+    """ Initalize DB function """
     db = connect()
 
-    with current_app.open_resource('DB_Files/Committe_DB_DDL_v3_WITH_DROP.ddl') as init_db_script:
-        db.execute(init_db_script.read().decode('utf-8'))
+    with current_app.open_resource('DB_Files/Committe_DB_DDL_v3_WITH_DROP_test.ddl') as init_db_script:
+        db.execute(init_db_script.read().decode('utf8'))
 
     db.close()
 
 
-# @click.command('init-db')
-# @with_appcontext
-# def init_db_command():
-#     """Clear the existing data and create new tables."""
-#     init_db()
-#     click.echo('Initialized the database.')
-
+def output_type_handler(cursor, name, default_type, size, precision, scale):
+    """ Handling CLOB & BLOB operations in the database."""
+    if default_type == oracledb.CLOB:
+        return cursor.var(oracledb.LONG_STRING, arraysize=cursor.arraysize)
+    if default_type == oracledb.BLOB:
+        return cursor.var(oracledb.LONG_BINARY, arraysize=cursor.arraysize)
