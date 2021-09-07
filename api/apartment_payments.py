@@ -49,3 +49,81 @@ def add_payment():
                        tenant_id, payment_date, amount])
     con.commit()
     return jsonify(r)
+
+@apartment_payments_bp.route('/invoice', methods=['GET'])
+def get_invoice():
+    # Get parameters from GET request and add to dictionary
+    tenant_id = request.args.get('tenant_id')
+    month = request.args.get('month')   # Integer the represents the month; May = 5
+
+    invoice_dict = {}
+    invoice_dict['tenant_id'] = tenant_id
+    invoice_dict['payments_details'] = {}
+    
+    if tenant_id and month:
+        # Get all payments of the tenant in a specicifed month
+        sql = f"SELECT * FROM apartment_payments WHERE tenant_id = {tenant_id}"
+        cursor.execute(sql)
+        r = cursor.fetchall()
+
+        # Make a dictionary of payments and calculate committe percentage
+        payments_dict = {}
+        committe_payment = 0 
+
+        i = 1
+        for item in r:
+            if item[3].month == int(month):
+                payments_dict[i] = {}
+                payments_dict[i]['payment_id'] = item[0]
+                payments_dict[i]['apartment_id'] = item[2]
+                payments_dict[i]['month'] = item[3].month
+                payments_dict[i]['payment_date'] = item[4].strftime('%d-%m-%y')
+                payments_dict[i]['amount'] = item[5]
+                committe_payment += item[5]
+                i += 1
+        
+        # Add payments_dict to the invoice_dict; with act as a nested dictionary
+        invoice_dict['payments_details'] = payments_dict
+        invoice_dict['committe_payment'] = committe_payment * 0.3
+
+        return jsonify(invoice_dict)
+    elif tenant_id:
+        # Get parameters from GET request and add to dictionary
+        tenant_id = request.args.get('tenant_id')
+
+        invoice_dict = {}
+        invoice_dict['tenant_id'] = tenant_id
+        invoice_dict['payments_details'] = {}
+
+        if tenant_id and month:
+            # Get all payments of the tenant in a specicifed month
+            sql = f"SELECT * FROM apartment_payments WHERE tenant_id = {tenant_id}"
+            cursor.execute(sql)
+            r = cursor.fetchall()
+
+            # Make a dictionary of payments and calculate committe percentage
+            payments_dict = {}
+            committe_payment = 0
+
+            i = 1
+            for item in r:
+                payments_dict[i] = {}
+                payments_dict[i]['payment_id'] = item[0]
+                payments_dict[i]['apartment_id'] = item[2]
+                payments_dict[i]['month'] = item[3].month
+                payments_dict[i]['payment_date'] = item[4].strftime('%d-%m-%y')
+                payments_dict[i]['amount'] = item[5]
+                committe_payment += item[5]
+                i += 1
+            
+            # Add payments_dict to the invoice_dict; with act as a nested dictionary
+            invoice_dict['payments_details'] = payments_dict
+            invoice_dict['committe_payment'] = committe_payment * 0.3
+
+            return jsonify(invoice_dict)
+        
+    else:
+        msg = "The tenant_id and/or month fields must be sent as parameters."
+        return jsonify(msg)
+    
+    
