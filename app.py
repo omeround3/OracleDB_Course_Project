@@ -1,14 +1,22 @@
+""" 
+The following is a Flask application that is set up with a Oracle SQL DB connection.
+
+** Contributors **
+Omer Lev-Ron
+Sam Media
+ 
+"""
+
 from flask import Flask, jsonify,request
-from db_manager import connect
+from db_manager import connect, init_db
 
 
 app = Flask(__name__)
 
-cursor= None
+cursor = None
 
 @app.route("/")
 def index():
-    cursor = connect()
     return "<p>Index Page</p>"
 
 @app.route("/tenants/")
@@ -33,6 +41,12 @@ def jobs():
     r = cursor.fetchall()
     print(r)
     return jsonify(r)
+
+@app.cli.command()
+def initdb():
+    """Clear the existing data and create new tables."""
+    init_db()
+    print('Initialized the database.')
 
 if __name__ == "__main__":
     cursor = connect()
