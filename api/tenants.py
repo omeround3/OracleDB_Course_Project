@@ -79,9 +79,9 @@ def available_apartments():
 def delete_tenant():
     # Get parameters from POST request
     tenant_id = request.form.get('tenant_id')
-
+    
     # Call DELETE_TENANT_PROC from DB
-    r = cursor.callproc('DELETE_TENANT_PROC', tenant_id)
+    r = cursor.callproc('DELETE_TENANT_PROC', [tenant_id])
     con.commit()
     return jsonify(r)
     
