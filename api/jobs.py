@@ -46,6 +46,7 @@ def jobs():
     r = cursor.fetchall()
     return jsonify(r)
 
+
 @jobs_bp.route('/request-job', methods=['POST'])
 def request_job():
     """ 
@@ -60,17 +61,19 @@ def request_job():
     job_type = data.get('job_type')
     tenant_id = data.get('tenant_id')
     description = data.get('description')
-    
+
     # Integrity check
-    job_types = ( 'cleaning', 'horticulture', 'plumbing', 'renovation', 'security' )
+    job_types = ('cleaning', 'horticulture',
+                 'plumbing', 'renovation', 'security')
     if job_type not in job_types:
         return f'Job type is invaild. The available jobs types are: {job_types}'
 
     # Call ADD_JOB_FUNC from DB
     r = cursor.callfunc('ADD_JOB_FUNC', int, [job_type,
-        tenant_id, description])
+                                              tenant_id, description])
     con.commit()
     return jsonify(r)
+
 
 @jobs_bp.route('/delete', methods=['GET'])
 def delete_job():
@@ -86,6 +89,7 @@ def delete_job():
     r = cursor.callproc('DELETE_JOB_PROC', [job_id])
     con.commit()
     return jsonify(r)
+
 
 @jobs_bp.route('/bids', methods=['GET'])
 def get_bids():
@@ -156,6 +160,90 @@ def get_bids():
         return jsonify(r)
 
 
+@jobs_bp.route('/show-payments', methods=['GET'])
+def show_payments():
+    """ 
+        A GET request to show jobs payment information.
+        :param contractor_id - exact number of contractor id
+        :param contractor_name - exact number of contractor id
+        :param job_id - exact number of job id
+        :param job_type - search payments by job type
+        :return - JSON object that contains jobs bids information.
+    """
+    # Get parameters from POGETST request
+    contractor_id = request.args.get('contractor_id')
+    contractor_name = request.args.get('contractor_name')
+    job_id = request.args.get('job_id')
+    job_type = request.args.get('job_type')
+
+    # Integrity check
+    job_types = ('cleaning', 'horticulture',
+                 'plumbing', 'renovation', 'security')
+    if job_type:
+        if job_type not in job_types:
+            return f'Job type is invaild. The available jobs types are: {job_types}'
+        else:
+            sql = """
+                SELECT cp.*, j.job_type, c.contractor_name
+                FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                WHERE cp.job_id = jb.job_id
+                AND cp.job_id = j.job_id
+                AND jb.contractor_id = c.contractor_id
+                AND j.job_type = :job_type
+                """
+        cursor.execute(sql, [job_type])
+        r = cursor.fetchall()
+        return jsonify(r)
+
+    elif contractor_id:
+        sql = """
+                SELECT cp.*, j.job_type, c.contractor_name
+                FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                WHERE cp.job_id = jb.job_id
+                AND cp.job_id = j.job_id
+                AND jb.contractor_id = c.contractor_id
+                AND c.contractor_id = :contractor_id
+                """
+        cursor.execute(sql, [contractor_id])
+        r = cursor.fetchall()
+        return jsonify(r)
+    elif contractor_name:
+        sql = """
+                SELECT cp.*, j.job_type, c.contractor_name
+                FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                WHERE cp.job_id = jb.job_id
+                AND cp.job_id = j.job_id
+                AND jb.contractor_id = c.contractor_id
+                AND c.contractor_name LIKE :contractor_name || '%'
+                """
+        cursor.execute(sql, [contractor_name])
+        r = cursor.fetchall()
+        return jsonify(r)
+    elif job_id:
+        sql = """
+                SELECT cp.*, j.job_type, c.contractor_name
+                FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                WHERE cp.job_id = jb.job_id
+                AND cp.job_id = j.job_id
+                AND jb.contractor_id = c.contractor_id
+                AND cp.job_id = :job_id
+                """
+        cursor.execute(sql, [job_id])
+        r = cursor.fetchall()
+        return jsonify(r)
+    else:
+        sql = """
+                SELECT cp.*, j.job_type, c.contractor_name
+                FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                WHERE cp.job_id = jb.job_id
+                AND cp.job_id = j.job_id
+                AND jb.contractor_id = c.contractor_id
+                """
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        return jsonify(r)
+
+
 @jobs_bp.route('/add-payment', methods=['POST'])
 def add_payment():
     """ 
@@ -174,6 +262,7 @@ def add_payment():
     payment_description = data.get('payment_description')
 
     # Call ADD_TENANT_FUNC from DB
-    r = cursor.callfunc('ADD_JOB_PAYMENT', int, [job_id, payment_date, price, payment_description])
+    r = cursor.callfunc('ADD_JOB_PAYMENT', int, [
+                        job_id, payment_date, price, payment_description])
     con.commit()
     return jsonify(r)
