@@ -74,7 +74,7 @@ def add_tenant():
     phone = request.form.get('phone')
     apartment_id = request.form.get('apartment_id')
     rate = request.form.get('rate')
-    last_vote_date = request.form.get('last_vote_date')
+    last_vote_date = request.form.get('last_vote_date', None)
 
     # Call ADD_TENANT_FUNC from DB
     r = cursor.callfunc('ADD_TENANT_FUNC', int, [tenant_id, first_name,
