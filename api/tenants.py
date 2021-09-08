@@ -31,7 +31,7 @@ def tenants():
                     at.last_vote_date
                 FROM tenant t
                 RIGHT JOIN apartment_tenants at ON t.tenant_id = at.tenant_id
-                WHERE FIRST_NAME LIKE ':name%' or LAST_NAME like ':name%'"""
+                WHERE FIRST_NAME LIKE :name || '%' or LAST_NAME like :name || '%'"""
         cursor.execute(sql, [name, name])
         r = cursor.fetchall()
         con.commit()
