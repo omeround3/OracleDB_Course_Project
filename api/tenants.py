@@ -84,15 +84,16 @@ def add_tenant():
         :return - JSON object that contains tenant_id
     """
     # Get parameters from POST request
-    tenant_id = request.form.get('tenant_id')
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
-    age = request.form.get('age')
-    phone = request.form.get('phone')
-    apartment_id = request.form.get('apartment_id')
-    rate = request.form.get('rate')
+    data = request.get_json()
+    tenant_id = data.get('tenant_id')
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    age = data.get('age')
+    phone = data.get('phone')
+    apartment_id = data.get('apartment_id')
+    rate = data.get('rate')
     last_vote_date = request.form.get('last_vote_date', None)
-
+    print(f"{tenant_id=}, {apartment_id=} , {last_vote_date=}")
     # Call ADD_TENANT_FUNC from DB
     r = cursor.callfunc('ADD_TENANT_FUNC', int, [tenant_id, first_name,
                                                  last_name, age, phone, apartment_id, rate, last_vote_date])
@@ -114,14 +115,15 @@ def update_tenant():
         :return - JSON object that contains tenant_id
     """
     # Get parameters from POST request
-    tenant_id = request.form.get('tenant_id')
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
-    age = request.form.get('age')
-    phone = request.form.get('phone')
-    apartment_id = request.form.get('apartment_id')
-    rate = request.form.get('rate')
-    last_vote_date = request.form.get('last_vote_date')
+    data = request.get_json()
+    tenant_id = data.get('tenant_id')
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    age = data.get('age')
+    phone = data.get('phone')
+    apartment_id = data.get('apartment_id')
+    rate = data.get('rate')
+    last_vote_date = request.form.get('last_vote_date', None)
 
     # Call ADD_TENANT_FUNC from DB
     r = cursor.callfunc('UPDATE_TENANT_FUNC', int, [tenant_id, first_name,
