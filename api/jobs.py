@@ -98,10 +98,59 @@ def get_bids():
     contractor_id = request.args.get('contractor_id')
     job_id = request.args.get('job_id')
 
-    # if contractor_id and job_id:
-        
-    # elif contractor_id:
-    
-    # elif job_id:
-
-    # else:
+    if contractor_id and job_id:
+        sql = """
+                SELECT 
+                    jb.job_id, 
+                    jb.contractor_id, 
+                    c.contractor_name,
+                    jb.price
+                FROM jobs_bids jb, contractors c
+                WHERE jb.contractor_id = c.contractor_id
+                AND jb.contractor_id = :contractor_id
+                AND jb.job_id = :job_id
+              """
+        cursor.execute(sql, [contractor_id, job_id])
+        r = cursor.fetchall()
+        return jsonify(r)
+    elif contractor_id:
+        sql = """
+                SELECT 
+                    jb.job_id, 
+                    jb.contractor_id, 
+                    c.contractor_name,
+                    jb.price
+                FROM jobs_bids jb, contractors c
+                WHERE jb.contractor_id = c.contractor_id
+                AND jb.contractor_id = :contractor_id
+                """
+        cursor.execute(sql, [contractor_id])
+        r = cursor.fetchall()
+        return jsonify(r)
+    elif job_id:
+        sql = """
+                SELECT 
+                    jb.job_id, 
+                    jb.contractor_id, 
+                    c.contractor_name,
+                    jb.price
+                FROM jobs_bids jb, contractors c
+                WHERE jb.contractor_id = c.contractor_id
+                AND jb.job_id = :job_id
+                """
+        cursor.execute(sql, [job_id])
+        r = cursor.fetchall()
+        return jsonify(r)
+    else:
+        sql = """
+                SELECT 
+                    jb.job_id, 
+                    jb.contractor_id, 
+                    c.contractor_name,
+                    jb.price
+                FROM jobs_bids jb, contractors c
+                WHERE jb.contractor_id = c.contractor_id
+                """
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        return jsonify(r)
