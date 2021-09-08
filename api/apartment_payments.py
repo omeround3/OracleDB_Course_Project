@@ -53,11 +53,12 @@ def add_payment():
         :return - JSON object that contains the new payment id
     """
     # Get parameters from POST request
-    apartment_id = request.form.get('apartment_id')
-    month = request.form.get('month')
-    tenant_id = request.form.get('tenant_id')
-    payment_date = request.form.get('payment_date')
-    amount = request.form.get('amount')
+    data = request.get_json()
+    apartment_id = data.get('apartment_id')
+    month = data.get('month')
+    tenant_id = data.get('tenant_id')
+    payment_date = data.get('payment_date')
+    amount = data.get('amount')
 
     # Call ADD_TENANT_FUNC from DB
     r = cursor.callfunc('ADD_PAYMENT_FUNC', int, [apartment_id, month,
