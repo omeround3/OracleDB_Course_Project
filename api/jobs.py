@@ -316,3 +316,45 @@ def get_plans():
         cursor.execute(sql)
         r = cursor.fetchall()
         return jsonify(r)
+
+@jobs_bp.route('/create-plan', methods=['POST'])
+def add_plan():
+    """ 
+        A POST request that creates a maintenance plan request from a tenant
+        :param job_id - the job_id tha the plan is related to
+        :param description - description of plan - NULLABLE
+        :return - JSON object that contains the new maintenance plan id
+    """
+    # Get parameters from POST request
+    data = request.get_json()
+    job_id = data.get('job_id')
+    description = data.get('description')
+
+    # Call ADD_JOB_FUNC from DB
+    r = cursor.callfunc('ADD_PLAN_FUNC', int, [job_id, description])
+    con.commit()
+    return jsonify(r)
+
+@jobs_bp.route('/update-plan', methods=['POST'])
+def update_plan():
+    """ 
+        A POST request that update a maintenance plan. The update is mainly to set the status of the maintenance plan
+        :param plan_id - the number of the maintenance plan
+        :param status - the status to update the plan to
+        :return - JSON object that contains the current maintenance plan id
+    """
+    # Get parameters from POST request
+    data = request.get_json()
+    plan_id = data.get('plan_id')
+    status = data.get('status')
+
+    # Integrity check
+    status_types = ( 'approved', 'declined', 'waiting' ) 
+    if status not in status_types:
+        return f'Status type is invaild. The available status types are: {status_types}'
+    if plan_id:
+        r = cursor.callfunc('UPDATE_PLAN_FUNC', int, [plan_id, status])
+        con.commit()
+        return jsonify(r)
+    else:
+        return jsonify('No plan id in the POST request.')

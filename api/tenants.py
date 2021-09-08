@@ -125,7 +125,7 @@ def update_tenant():
     rate = data.get('rate')
     last_vote_date = request.form.get('last_vote_date', None)
 
-    # Call ADD_TENANT_FUNC from DB
+    # Call UPDATE_TENANT_FUNC from DB
     r = cursor.callfunc('UPDATE_TENANT_FUNC', int, [tenant_id, first_name,
                                                     last_name, age, phone, apartment_id, rate, last_vote_date])
     con.commit()
@@ -156,7 +156,7 @@ def delete_tenant():
         :param tenant_id - exact number of tenant id
         :return - JSON object that contains list of available apartments
     """
-    # Get parameters from POST request
+    # Get parameters from GET request
     tenant_id = request.args.get('id')
 
     # Call DELETE_TENANT_PROC from DB
