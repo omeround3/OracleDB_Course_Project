@@ -154,3 +154,26 @@ def get_bids():
         cursor.execute(sql)
         r = cursor.fetchall()
         return jsonify(r)
+
+
+@jobs_bp.route('/add-payment', methods=['POST'])
+def add_payment():
+    """ 
+        A POST request that adds a new job payment to the database.
+        :param job_id - exact number of job id
+        :param payment_date - the date the payment was made
+        :param price - payment amount
+        :param payment_description - A description for the payment - NULLABLE
+        :return - JSON object that contains the new payment id
+    """
+    # Get parameters from POST request
+    data = request.get_json()
+    job_id = data.get('job_id')
+    payment_date = data.get('payment_date')
+    price = data.get('price')
+    payment_description = data.get('payment_description')
+
+    # Call ADD_TENANT_FUNC from DB
+    r = cursor.callfunc('ADD_JOB_PAYMENT', int, [job_id, payment_date, price, payment_description])
+    con.commit()
+    return jsonify(r)

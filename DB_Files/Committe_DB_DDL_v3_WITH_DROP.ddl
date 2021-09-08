@@ -94,7 +94,7 @@ ALTER TABLE contractors ADD CONSTRAINT contractors_pk PRIMARY KEY ( contractor_i
 CREATE TABLE contractors_payments (
     payment_id          INTEGER NOT NULL,
     job_id              INTEGER NOT NULL,
-    "date"              DATE NOT NULL,
+    payment_date        DATE NOT NULL,
     price               INTEGER NOT NULL CHECK ( price >= 0 ),
     payment_description CLOB
 );
