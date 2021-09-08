@@ -12,15 +12,56 @@ tenants_bp = Blueprint('tenants', __name__, url_prefix='/tenants')
 @tenants_bp.route("/", methods=['GET'])
 def tenants():
     name = request.args.get('name')
+    tenant_id = request.args.get('id')
     if name:
-        cursor.execute(
-            f"SELECT * FROM tenant WHERE FIRST_NAME LIKE '{name}%' or LAST_NAME like '{name}%'")
+        sql = """SELECT 
+                    t.tenant_id, 
+                    t.first_name, 
+                    t.last_name, 
+                    t.age,
+                    t.phone,
+                    at.apartment_id,
+                    at.rate,
+                    at.last_vote_date
+                FROM tenant t
+                RIGHT JOIN apartment_tenants at ON t.tenant_id = at.tenant_id
+                WHERE FIRST_NAME LIKE :name or LAST_NAME like :name"""
+        cursor.execute(sql, [name, name])
         r = cursor.fetchall()
         con.commit()
         return jsonify(r)
-    cursor.execute("select * from tenant")
-    r = cursor.fetchall()
-    return jsonify(r)
+    elif tenant_id:
+        sql = """SELECT 
+                    t.tenant_id, 
+                    t.first_name, 
+                    t.last_name, 
+                    t.age,
+                    t.phone,
+                    at.apartment_id,
+                    at.rate,
+                    at.last_vote_date
+                FROM tenant t
+                RIGHT JOIN apartment_tenants at ON t.tenant_id = at.tenant_id
+                WHERE t.tenant_id = :tenant_id"""
+        cursor.execute(sql, [tenant_id])
+        r = cursor.fetchall()
+        con.commit()
+        return jsonify(r)
+    else:
+        sql = """SELECT 
+                    t.tenant_id, 
+                    t.first_name, 
+                    t.last_name, 
+                    t.age,
+                    t.phone,
+                    at.apartment_id,
+                    at.rate,
+                    at.last_vote_date
+                FROM tenant t
+                RIGHT JOIN apartment_tenants at ON t.tenant_id = at.tenant_id"""
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        return jsonify(r)
 
 
 @tenants_bp.route('/add', methods=['POST'])
@@ -75,11 +116,11 @@ def available_apartments():
     
     return jsonify(available_apartments)
 
-@tenants_bp.route('/delete', methods=['POST'])
+@tenants_bp.route('/delete', methods=['GET'])
 def delete_tenant():
     # Get parameters from POST request
-    tenant_id = request.form.get('tenant_id')
-    
+    tenant_id = request.args.get('id')
+
     # Call DELETE_TENANT_PROC from DB
     r = cursor.callproc('DELETE_TENANT_PROC', [tenant_id])
     con.commit()
