@@ -16,9 +16,9 @@ def jobs():
     """ 
         A GET request that returns apartments payment information
         :param id - exact number of job id
-        :return - JSON object that contains apartment payments information
+        :return - JSON object that contains jobs information
     """
-    job_id = request.args.get('id')
+    job_id = request.args.get('job_id')
     if job_id:
         sql = """SELECT * FROM jobs WHERE job_id = :job_id"""
         cursor.execute(sql, [job_id])
@@ -35,7 +35,7 @@ def request_job():
         :param job_type - the month the tenant is paying for
         :param tenant_id - exact number of tenant id
         :param description - description of job - NULLABLE
-        :return - JSON object that contains the new payment id
+        :return - JSON object that contains the new job id
     """
     # Get parameters from POST request
     data = request.get_json()
@@ -51,5 +51,20 @@ def request_job():
     # Call ADD_JOB_FUNC from DB
     r = cursor.callfunc('ADD_JOB_FUNC', int, [job_type,
         tenant_id, description])
+    con.commit()
+    return jsonify(r)
+
+@jobs_bp.route('/delete', methods=['GET'])
+def delete_job():
+    """ 
+        A GET request to delete a job by job id
+        :param job_id - exact number of job id
+        :return - the deleted job id
+    """
+    # Get parameters from POST request
+    job_id = request.args.get('job_id')
+
+    # Call DELETE_TENANT_PROC from DB
+    r = cursor.callproc('DELETE_JOB_PROC', [job_id])
     con.commit()
     return jsonify(r)
