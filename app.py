@@ -13,6 +13,7 @@ from api.tenants import tenants_bp
 from api.apartment_payments import apartment_payments_bp
 from api.jobs import jobs_bp
 from api.apartment import apartment_bp
+from api.contractors import contractors_bp
 
 
 app = Flask(__name__)
@@ -24,6 +25,7 @@ app.register_blueprint(tenants_bp)
 app.register_blueprint(apartment_payments_bp)
 app.register_blueprint(jobs_bp)
 app.register_blueprint(apartment_bp)
+app.register_blueprint(contractors_bp)
 
 
 @app.route("/")
