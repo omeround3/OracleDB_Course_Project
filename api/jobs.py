@@ -168,6 +168,7 @@ def show_payments():
         :param contractor_name - exact number of contractor id
         :param job_id - exact number of job id
         :param job_type - search payments by job type
+        :param month - search payments by month
         :return - JSON object that contains jobs bids information.
     """
     # Get parameters from POGETST request
@@ -175,6 +176,7 @@ def show_payments():
     contractor_name = request.args.get('contractor_name')
     job_id = request.args.get('job_id')
     job_type = request.args.get('job_type')
+    month = request.args.get('month')
 
     # Integrity check
     job_types = ('cleaning', 'horticulture',
@@ -182,6 +184,19 @@ def show_payments():
     if job_type:
         if job_type not in job_types:
             return f'Job type is invaild. The available jobs types are: {job_types}'
+        elif month:
+            sql = """
+                SELECT cp.*, j.job_type, c.contractor_name
+                FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                WHERE cp.job_id = jb.job_id
+                AND cp.job_id = j.job_id
+                AND jb.contractor_id = c.contractor_id
+                AND j.job_type = :job_type
+                AND EXTRACT(month FROM payment_date) = :month
+                """
+            cursor.execute(sql, [job_type, month])
+            r = cursor.fetchall()
+            return jsonify(r)
         else:
             sql = """
                 SELECT cp.*, j.job_type, c.contractor_name
@@ -191,44 +206,99 @@ def show_payments():
                 AND jb.contractor_id = c.contractor_id
                 AND j.job_type = :job_type
                 """
-        cursor.execute(sql, [job_type])
-        r = cursor.fetchall()
-        return jsonify(r)
+            cursor.execute(sql, [job_type])
+            r = cursor.fetchall()
+            return jsonify(r)
 
     elif contractor_id:
-        sql = """
+        if month:
+            sql = """
                 SELECT cp.*, j.job_type, c.contractor_name
                 FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
                 WHERE cp.job_id = jb.job_id
                 AND cp.job_id = j.job_id
                 AND jb.contractor_id = c.contractor_id
                 AND c.contractor_id = :contractor_id
+                AND EXTRACT(month FROM payment_date) = :month
                 """
-        cursor.execute(sql, [contractor_id])
-        r = cursor.fetchall()
-        return jsonify(r)
+            cursor.execute(sql, [contractor_id, month])
+            r = cursor.fetchall()
+            return jsonify(r)
+        else:
+            sql = """
+                    SELECT cp.*, j.job_type, c.contractor_name
+                    FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                    WHERE cp.job_id = jb.job_id
+                    AND cp.job_id = j.job_id
+                    AND jb.contractor_id = c.contractor_id
+                    AND c.contractor_id = :contractor_id
+                    """
+            cursor.execute(sql, [contractor_id])
+            r = cursor.fetchall()
+            return jsonify(r)
     elif contractor_name:
-        sql = """
+        if month:
+            sql = """
                 SELECT cp.*, j.job_type, c.contractor_name
                 FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
                 WHERE cp.job_id = jb.job_id
                 AND cp.job_id = j.job_id
                 AND jb.contractor_id = c.contractor_id
                 AND c.contractor_name LIKE :contractor_name || '%'
+                AND EXTRACT(month FROM payment_date) = :month
                 """
-        cursor.execute(sql, [contractor_name])
-        r = cursor.fetchall()
-        return jsonify(r)
+            cursor.execute(sql, [contractor_name, month])
+            r = cursor.fetchall()
+            return jsonify(r)
+        else:
+            sql = """
+                    SELECT cp.*, j.job_type, c.contractor_name
+                    FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                    WHERE cp.job_id = jb.job_id
+                    AND cp.job_id = j.job_id
+                    AND jb.contractor_id = c.contractor_id
+                    AND c.contractor_name LIKE :contractor_name || '%'
+                    """
+            cursor.execute(sql, [contractor_name])
+            r = cursor.fetchall()
+            return jsonify(r)
     elif job_id:
-        sql = """
+        if month:
+            sql = """
                 SELECT cp.*, j.job_type, c.contractor_name
                 FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
                 WHERE cp.job_id = jb.job_id
                 AND cp.job_id = j.job_id
                 AND jb.contractor_id = c.contractor_id
                 AND cp.job_id = :job_id
+                AND EXTRACT(month FROM payment_date) = :month
                 """
-        cursor.execute(sql, [job_id])
+            cursor.execute(sql, [job_id, month])
+            r = cursor.fetchall()
+            return jsonify(r)
+        else:
+            sql = """
+                    SELECT cp.*, j.job_type, c.contractor_name
+                    FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                    WHERE cp.job_id = jb.job_id
+                    AND cp.job_id = j.job_id
+                    AND jb.contractor_id = c.contractor_id
+                    AND cp.job_id = :job_id
+                    """
+            cursor.execute(sql, [job_id])
+            r = cursor.fetchall()
+            return jsonify(r)
+    elif month:
+        month = int(month)
+        sql = """
+                SELECT cp.*, j.job_type, c.contractor_name
+                FROM contractors_payments cp, jobs j, jobs_bids jb, contractors c
+                WHERE cp.job_id = jb.job_id
+                AND cp.job_id = j.job_id
+                AND jb.contractor_id = c.contractor_id
+                AND EXTRACT(month FROM payment_date) = :month
+                """
+        cursor.execute(sql, [month])
         r = cursor.fetchall()
         return jsonify(r)
     else:
