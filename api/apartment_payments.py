@@ -11,6 +11,12 @@ apartment_payments_bp = Blueprint('apartment_payments', __name__, url_prefix='/a
 
 @apartment_payments_bp.route("/", methods=['GET'])
 def payments():
+    """ 
+        A GET request that returns apartments payment information
+        :param apartment_id - exact number of apartment id
+        :param tenant_id - exact number of tenant id
+        :return - JSON object that contains apartment payments information
+    """
     apartment_id = request.args.get('apartment_id')
     tenant_id = request.args.get('tenant_id')
     if apartment_id and tenant_id:
@@ -37,6 +43,15 @@ def payments():
 
 @apartment_payments_bp.route('/add', methods=['POST'])
 def add_payment():
+    """ 
+        A POST request that adds a new apartment payment to the database.
+        :param month - the month the tenant is paying for
+        :param apartment_id - exact number of apartment id
+        :param tenant_id - exact number of tenant id
+        :param payment_date - the date the payment was made
+        :param amount - payment amount
+        :return - JSON object that contains the new payment id
+    """
     # Get parameters from POST request
     apartment_id = request.form.get('apartment_id')
     month = request.form.get('month')
@@ -52,6 +67,14 @@ def add_payment():
 
 @apartment_payments_bp.route('/invoice', methods=['GET'])
 def get_invoice():
+    """ 
+        A GET request that creates a JSON object with the neccesary information to create an invoice.
+        The invoice can be created by tenant_id and/or month that the tenant paid for.
+        :param tenant_id - exact number of tenant id
+        :param month - the month the tenant is paying for
+        :return - JSON object that contains the new payment id
+    """
+    # Get p
     # Get parameters from GET request and add to dictionary
     tenant_id = request.args.get('tenant_id')
     month = request.args.get('month')   # Integer the represents the month; May = 5

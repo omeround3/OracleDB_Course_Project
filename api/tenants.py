@@ -11,6 +11,12 @@ tenants_bp = Blueprint('tenants', __name__, url_prefix='/tenants')
 
 @tenants_bp.route("/", methods=['GET'])
 def tenants():
+    """ 
+        A GET request that returns tenants information.
+        :param name - a name of the tenant. This will return names that begins with the input string
+        :param tenant_id - exact number of tenant id
+        :return - JSON object
+    """
     name = request.args.get('name')
     tenant_id = request.args.get('id')
     if name:
@@ -66,6 +72,17 @@ def tenants():
 
 @tenants_bp.route('/add', methods=['POST'])
 def add_tenant():
+    """ 
+        A function to add a new tenant 
+        :param tenant_id - exact number of tenant id
+        :param first_name - tenant first_name
+        :param last_name - tenant last_name
+        :param age - tenant age
+        :param phone - tenant phone number
+        :param rate - tenant rate
+        :param last_vote_date - last vote date for the committe - NULLABLE
+        :return - JSON object that contains tenant_id
+    """
     # Get parameters from POST request
     tenant_id = request.form.get('tenant_id')
     first_name = request.form.get('first_name')
@@ -85,6 +102,17 @@ def add_tenant():
 
 @tenants_bp.route('/update', methods=['POST'])
 def update_tenant():
+    """ 
+        A POST request to update the tenant details
+        :param tenant_id - exact number of tenant id
+        :param first_name - tenant first_name
+        :param last_name - tenant last_name
+        :param age - tenant age
+        :param phone - tenant phone number
+        :param rate - tenant rate
+        :param last_vote_date - last vote date for the committe - NULLABLE
+        :return - JSON object that contains tenant_id
+    """
     # Get parameters from POST request
     tenant_id = request.form.get('tenant_id')
     first_name = request.form.get('first_name')
@@ -103,7 +131,10 @@ def update_tenant():
 
 @tenants_bp.route('/available-apartments', methods=['GET'])
 def available_apartments():
-    """ Returns a list of available apartments (not fully occupied) """
+    """ 
+        Returns a list of available apartments (not fully occupied) 
+        :return - JSON object that contains list of available apartments
+    """
     sql = "SELECT apartment_id FROM apartment"
     cursor.execute(sql)
     apartments_id = cursor.fetchall()
@@ -118,6 +149,11 @@ def available_apartments():
 
 @tenants_bp.route('/delete', methods=['GET'])
 def delete_tenant():
+    """ 
+        A GET request to delete a tenant by tenant id
+        :param tenant_id - exact number of tenant id
+        :return - JSON object that contains list of available apartments
+    """
     # Get parameters from POST request
     tenant_id = request.args.get('id')
 
