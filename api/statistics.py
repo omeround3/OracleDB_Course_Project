@@ -40,25 +40,25 @@ def statistics():
     cursor.execute("""SELECT COUNT(plan_id) 
                     FROM maintenance_plan
                     WHERE status = 'approved'""")
-    num_approved = cursor.fetchall()
-    r['num_approved'] = num_approved[0][0]
+    num_approved_plans = cursor.fetchall()
+    r['num_approved_plans'] = num_approved_plans[0][0]
 
     # Get number of declined maintenance plans
     cursor.execute("""SELECT COUNT(plan_id) 
                     FROM maintenance_plan
                     WHERE status = 'declined'""")
-    num_declined = cursor.fetchall()
-    r['num_declined'] = num_declined[0][0]
+    num_declined_plans = cursor.fetchall()
+    r['num_declined_plans'] = num_declined_plans[0][0]
 
     # Get number of waiting for approval maintenance plans
     cursor.execute("""SELECT COUNT(plan_id) 
                     FROM maintenance_plan
                     WHERE status = 'waiting'""")
-    num_waiting = cursor.fetchall()
-    r['num_waiting'] = num_waiting[0][0]
+    num_waiting_plans = cursor.fetchall()
+    r['num_waiting_plans'] = num_waiting_plans[0][0]
 
     # Get committe balance
-    balance = cursor.callfunc('COMMITTE_BALANCE', int)
-    r['balance'] = balance
+    committe_balance = cursor.callfunc('COMMITTE_BALANCE', int)
+    r['committe_balance'] = committe_balance
 
     return jsonify(r)
