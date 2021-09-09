@@ -1,11 +1,11 @@
 --------------------------------------------------------
---  File created - Tuesday-September-07-2021   
+--  File created - Thursday-September-09-2021   
 --------------------------------------------------------
 --------------------------------------------------------
---  DDL for Function COMMITE_BALANCE
+--  DDL for Function COMMITTE_BALANCE
 --------------------------------------------------------
 
-  CREATE OR REPLACE NONEDITIONABLE FUNCTION "SYSTEM"."COMMITE_BALANCE" RETURN NUMBER
+  CREATE OR REPLACE NONEDITIONABLE FUNCTION "SYSTEM"."COMMITTE_BALANCE" RETURN NUMBER
 IS
     total_tenants_payments NUMBER;
     total_contractors_payments NUMBER;
