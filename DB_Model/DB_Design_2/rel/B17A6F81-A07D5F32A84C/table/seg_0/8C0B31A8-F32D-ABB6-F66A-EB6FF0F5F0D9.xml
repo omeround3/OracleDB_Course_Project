@@ -47,7 +47,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="price" id="6C422CEE-CFE5-4630-0C5E-76586F537610">
+<Column name="payment_date" id="6C422CEE-CFE5-4630-0C5E-76586F537610">
 <createdBy>ops1-lp</createdBy>
 <createdTime>2021-08-21 09:11:21 UTC</createdTime>
 <generatorID>D2BBF167-A586-2AF7-5D9E-00DEE0FB0CC0</generatorID>
