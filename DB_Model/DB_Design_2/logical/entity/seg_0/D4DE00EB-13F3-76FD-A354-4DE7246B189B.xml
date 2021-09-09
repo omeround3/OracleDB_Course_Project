@@ -1,0 +1,93 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="D4DE00EB-13F3-76FD-A354-4DE7246B189B" name="apartment tenants">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:14:51 UTC</createdTime>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<engineerTo>
+<item key="B17A6F81-4605-35DD-C669-A07D5F32A84C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="apartment id" id="7B80CF95-D649-1D11-4BED-54D6414F385E">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-08-21 08:14:49 UTC</createdTime>
+<generatorID>F76E4BCE-748F-A063-4527-F018EA433794</generatorID>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<engineerTo>
+<item key="B17A6F81-4605-35DD-C669-A07D5F32A84C" value="true"/>
+</engineerTo>
+<referedAttribute>F08EE1A9-507D-E0A8-CC05-60AC9D44CDB1</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tenant id" id="28F21921-40B7-673C-BC20-D4703F7A3BD3">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-08-21 08:18:48 UTC</createdTime>
+<generatorID>CA749567-1D71-1C1E-0EBC-82A22711166C</generatorID>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<engineerTo>
+<item key="B17A6F81-4605-35DD-C669-A07D5F32A84C" value="true"/>
+</engineerTo>
+<referedAttribute>932781DD-F7CF-DF96-E884-EE97B239E031</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="rate" id="98E70101-47A9-D991-225F-B0CA1BF7960A">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:18:17 UTC</createdTime>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<engineerTo>
+<item key="B17A6F81-4605-35DD-C669-A07D5F32A84C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="rate &gt;= 0"/>
+</checkConstraint>
+<defaultValue>500</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="last vote date" id="7B8F962C-64C4-1129-1B72-D7F5B8D5E778">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:26:09 UTC</createdTime>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<engineerTo>
+<item key="B17A6F81-4605-35DD-C669-A07D5F32A84C" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="5389650D-AAE5-D7ED-2BAA-2FEB664BE101" name="AT_PK">
+<createdBy>ops1-lp</createdBy>
+<createdTime>2021-07-28 21:18:10 UTC</createdTime>
+<ownerDesignName>DB_Design_2</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="B17A6F81-4605-35DD-C669-A07D5F32A84C" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<newElementsIDs>F76E4BCE-748F-A063-4527-F018EA433794,CA749567-1D71-1C1E-0EBC-82A22711166C</newElementsIDs>
+<usedAttributes>
+<attributeRef>7B80CF95-D649-1D11-4BED-54D6414F385E</attributeRef>
+<attributeRef>28F21921-40B7-673C-BC20-D4703F7A3BD3</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
