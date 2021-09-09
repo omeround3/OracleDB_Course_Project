@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from db_manager import connect
+import json
 
 # DB Connection
 con = connect()
@@ -15,7 +16,7 @@ def payments():
         A GET request that returns apartments payment information
         :param apartment_id - exact number of apartment id
         :param tenant_id - exact number of tenant id
-        :return - JSON object that contains apartment payments information
+        :return - JSON object that contains apartment payments information. The data returned is (payment_id, tenant_id, apartment_id, month, payment_date, amount)
     """
     apartment_id = request.args.get('apartment_id')
     tenant_id = request.args.get('tenant_id')
@@ -150,4 +151,67 @@ def get_invoice():
         msg = "The tenant_id and/or month fields must be sent as parameters."
         return jsonify(msg)
     
-    
+@apartment_payments_bp.route("/debts", methods=['GET'])
+def debts():
+    """ 
+        A GET request that returns debts information about apartments payment
+        :param apartment_id - exact number of apartment id
+        :param tenant_id - exact number of tenant id
+        :param month - number of month
+        :return - JSON object that contains debts information about apartment payments .
+    """
+    apartment_id = request.args.get('apartment_id')
+    tenant_id = request.args.get('tenant_id')
+    month = request.args.get('month')
+
+    sql = """
+            SELECT 
+                at.apartment_id, 
+                at.tenant_id,
+                t.first_name || ' ' || t.last_name as full_name,
+                at.rate
+            FROM
+                (SELECT debts.tenant_id
+                FROM
+                    (SELECT DISTINCT
+                        ap.apartment_id, 
+                        ap.tenant_id,
+                        mp.monthly_sum,
+                        (SELECT at.rate FROM apartment_tenants at WHERE at.tenant_id = ap.tenant_id) as rate
+                    FROM 
+                        apartment_payments ap,
+                        (SELECT tenant_id, SUM(amount) monthly_sum
+                        FROM apartment_payments 
+                        WHERE EXTRACT(month FROM month) = :month
+                        GROUP BY tenant_id) mp
+                    WHERE ap.tenant_id = mp.tenant_id) debts
+                WHERE debts.monthly_sum < debts.rate
+                UNION
+                (SELECT tenant_id
+                FROM tenant
+                MINUS
+                SELECT count_payments.tenant_id
+                FROM
+                    (SELECT tenant_id, COUNT(payment_id) payments_amount
+                    FROM apartment_payments
+                    WHERE EXTRACT(month FROM month) = :month
+                    GROUP BY tenant_id) count_payments)
+                ) tenants_debts,
+                apartment_tenants at,
+                tenant t
+            WHERE tenants_debts.tenant_id = at.tenant_id
+            AND at.tenant_id = t.tenant_id
+            """
+    debts_list = []
+    if month:
+        cursor.execute(sql, month)
+        r = cursor.fetchall()
+        v_month = int(month)
+        i = 0
+        for item in r:
+            debts_list.append(list(item))
+            tenant_debt = cursor.callfunc('TENANT_DEBT', int, [item[1], v_month])
+            debts_list[i].append(tenant_debt)
+            i += 1
+        print(debts_list)
+        return jsonify(debts_list)
