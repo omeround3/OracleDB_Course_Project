@@ -220,7 +220,7 @@ def debts():
             i += 1
         return jsonify(debts_list)
     
-    if start_month and end_month:
+    elif start_month and end_month:
         sql = """SELECT 
                     at.apartment_id, 
                     at.tenant_id,
@@ -270,3 +270,5 @@ def debts():
             debts_list[i].append(tenant_debt)
             i += 1
         return jsonify(debts_list)
+    else:
+        return jsonify("No <month> parameter could be found")
