@@ -163,6 +163,28 @@ def delete_tenant():
     r = cursor.callproc('DELETE_TENANT_PROC', [tenant_id])
     con.commit()
     return jsonify(r)
+
+@tenants_bp.route('/committe', methods=['GET'])
+def get_committe():
+    """ 
+        A GET request to get the current committe members.
+        :return - JSON object that contains list of current committe members
+    """
+    # Get parameters from GET request
+
+    sql = """
+            SELECT 
+                c.candidate_id,
+                t.first_name || ' ' || t.last_name as full_name,
+                c.num_supporters
+            FROM candidates c, tenant t
+            WHERE status = 'elected'
+            AND t.tenant_id = c.candidate_id
+            """
+    cursor.execute(sql)
+    r = cursor.fetchall()
+    con.commit()
+    return jsonify(r)
     
 
 

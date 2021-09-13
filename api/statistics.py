@@ -61,4 +61,11 @@ def statistics():
     committe_balance = cursor.callfunc('COMMITTE_BALANCE', int)
     r['committe_balance'] = committe_balance
 
+    # Get number of committe members
+    cursor.execute("""SELECT COUNT(candidate_id) 
+                    FROM candidates
+                    WHERE status = 'elected'""")
+    num_committe_members = cursor.fetchall()
+    r['num_committe_members'] = num_committe_members[0][0]
+
     return jsonify(r)
