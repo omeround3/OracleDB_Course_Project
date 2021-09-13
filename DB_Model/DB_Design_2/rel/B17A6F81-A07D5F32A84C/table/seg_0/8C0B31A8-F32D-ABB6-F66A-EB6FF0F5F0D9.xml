@@ -36,7 +36,7 @@
 <colAssociation fkAssociation="18BC5DCC-C1A5-C55E-DA5F-73D18B644213" referredColumn="8AB06EB4-2B5A-6918-38BB-598918363885"/>
 </associations>
 </Column>
-<Column name="date" id="CD65E975-FB99-5CB6-5AA2-9B87D0AD228D">
+<Column name="payment_date" id="CD65E975-FB99-5CB6-5AA2-9B87D0AD228D">
 <createdBy>ops1-lp</createdBy>
 <createdTime>2021-08-21 09:11:21 UTC</createdTime>
 <generatorID>24017CBD-C8FA-2C4D-17EE-DD0D20DE7823</generatorID>
@@ -47,7 +47,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="payment_date" id="6C422CEE-CFE5-4630-0C5E-76586F537610">
+<Column name="price" id="6C422CEE-CFE5-4630-0C5E-76586F537610">
 <createdBy>ops1-lp</createdBy>
 <createdTime>2021-08-21 09:11:21 UTC</createdTime>
 <generatorID>D2BBF167-A586-2AF7-5D9E-00DEE0FB0CC0</generatorID>
