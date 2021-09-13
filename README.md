@@ -14,6 +14,7 @@ The project implements an Oracle XE Database for a joint house commite system.
 - Python
 - Flask - The project's backend web framework
 - Angluar - The project's frontend web framework
+- Digital Ocean - Cloud Computing Platform
 
 **Architecture Diagram**
 ![picture alt](https://github.com/omeround3/OracleDB_Course_Project/blob/main/Oracle%20DB%20Project%20Diagram.jpeg)
