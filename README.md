@@ -15,6 +15,8 @@ The project implements an Oracle XE Database for a joint house commite system.
 - Flask - The project's backend web framework
 - Angluar - The project's frontend web framework
 
+**Architecture Diagram**
+![picture alt](https://github.com/omeround3/OracleDB_Course_Project/blob/main/Oracle%20DB%20Project%20Diagram.jpeg)
 
 ## How to run
 1. Clone this repository to the the machine you would like to run it from (`clone https://github.com/omeround3/OracleDB_Course_Project.git`)
